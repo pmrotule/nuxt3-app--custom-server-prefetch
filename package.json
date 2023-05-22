@@ -1,13 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "node --inspect=6123 ./node_modules/.bin/nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "dependencies": {
+    "nuxt": "^3.4.3"
+  },
   "devDependencies": {
-    "nuxt": "^3.2.3"
+    "@nuxt/devtools": "^0.4.5"
   }
 }
