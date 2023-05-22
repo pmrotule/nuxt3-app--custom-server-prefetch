@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "node --inspect=6123 ./node_modules/.bin/nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
