@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-console.log('page setup start')
+console.log('layout setup start')
 
 const route = useRoute()
 const nuxtApp = useNuxtApp()
@@ -21,20 +21,20 @@ route.matched.forEach(matchedRoute => {
 
 const [{ data: data1 }, { data: data2 }] = await Promise.all([
   useAsyncData('data1', async () => {
-    console.log('page query1 start')
+    console.log('layout query1 start')
     await new Promise(resolve => setTimeout(resolve, 2000))
-    console.log('page query1 end')
+    console.log('layout query1 end')
 
     return { foo1: 123 }
   }),
   useAsyncData('data2', async () => {
-    console.log('page query2 start')
+    console.log('layout query2 start')
     await new Promise(resolve => setTimeout(resolve, 3000))
-    console.log('page query2 end')
+    console.log('layout query2 end')
 
     return { foo2: 456 }
   }),
 ])
 
-console.log('page setup end')
+console.log('layout setup end')
 </script>

@@ -9,7 +9,7 @@ import { useNuxtApp } from '#imports'
 
 type NuxtApp = ReturnType<typeof useNuxtApp>
 
-const DATA_KEY = '__someChildData'
+const DATA_KEY = '__homepageData'
 const MOCK_DATA = { bar: 14551 }
 
 async function fetchData(nuxtApp: NuxtApp) {
@@ -22,15 +22,15 @@ export default defineNuxtComponent({
   name: 'Homepage',
 
   async setup() {
-    console.log('some child setup start')
+    console.log('..PAGE setup start')
     const nuxtApp = useNuxtApp()
 
-    const { data } = await useAsyncData('somechild', async () => {
-      console.log('some child query start')
-      const end = () => console.log('some child query end')
+    const { data } = await useAsyncData('homepageData', async () => {
+      console.log('..PAGE query start')
+      const end = () => console.log('..PAGE query end')
 
       if (nuxtApp[DATA_KEY]) {
-        console.log('using some-child cached data 👍')
+        console.log('..using PAGE cached data 👍')
         end()
         return nuxtApp[DATA_KEY]
       }
@@ -39,15 +39,15 @@ export default defineNuxtComponent({
       return data
     })
 
-    console.log('some child setup end')
+    console.log('..PAGE setup end')
 
     return { data }
   },
 
   async parallelServerPrefetch(nuxtApp: NuxtApp) {
-    console.log('some child prefetch start')
+    console.log('..PAGE prefetch start')
     const data = await fetchData(nuxtApp)
-    console.log('some child prefetch end')
+    console.log('..PAGE prefetch end')
 
     return data
   },
