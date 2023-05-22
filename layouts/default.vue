@@ -12,29 +12,33 @@ console.log('layout setup start')
 const route = useRoute()
 const nuxtApp = useNuxtApp()
 
-route.matched.forEach(matchedRoute => {
-  try {
-    //@ts-ignore
-    matchedRoute.components.default.parallelServerPrefetch(nuxtApp)
-  } catch (e) {}
+const data1 = ref({})
+const data2 = ref({})
+
+onServerPrefetch(async () => {
+  for (const matchedRoute of route.matched) {
+    try {
+      //@ts-ignore
+      await matchedRoute.components.default.parallelServerPrefetch(nuxtApp)
+    } catch (e) {}
+  }
 })
 
-const [{ data: data1 }, { data: data2 }] = await Promise.all([
-  useAsyncData('data1', async () => {
-    console.log('layout query1 start')
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    console.log('layout query1 end')
+useAsyncData('data1', async () => {
+  console.log('layout query1 start')
+  await new Promise(resolve => setTimeout(resolve, 2000))
+  console.log('layout query1 end')
 
-    return { foo1: 123 }
-  }),
-  useAsyncData('data2', async () => {
-    console.log('layout query2 start')
-    await new Promise(resolve => setTimeout(resolve, 3000))
-    console.log('layout query2 end')
+  data1.value = { foo1: 123 }
+})
 
-    return { foo2: 456 }
-  }),
-])
+useAsyncData('data2', async () => {
+  console.log('layout query2 start')
+  await new Promise(resolve => setTimeout(resolve, 3000))
+  console.log('layout query2 end')
+
+  data2.value = { foo2: 456 }
+})
 
 console.log('layout setup end')
 </script>
