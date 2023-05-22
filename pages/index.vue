@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { useNuxtApp } from '#imports'
-import SomeChild from '@/components/SomeChild.vue'
 
 type NuxtApp = ReturnType<typeof useNuxtApp>
 
@@ -21,7 +20,6 @@ async function fetchData(nuxtApp: NuxtApp) {
 
 export default defineNuxtComponent({
   name: 'Homepage',
-  components: { SomeChild },
 
   async setup() {
     console.log('some child setup start')
